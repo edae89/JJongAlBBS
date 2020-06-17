@@ -4,9 +4,25 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 
 <mapper namespace="com.he.mapper.MapperDAO">
-	<resultMap type="com.he.DTO.MemberDTO" id="resultList">
-		<result property="name" column="name" />
-		<result property="id" column="id" />
+	<resultMap type="com.he.DTO.BoardDTO" id="resultList">
+		<result property="ju_id" column="ju_id" />
+		<result property="jb_gsb" column="jb_gsb" />
+		<result property="jb_theme" column="jb_theme" />
+		<result property="jb_supply" column="jb_supply" />
+		<result property="jb_target" column="jb_target" />
+		<result property="jb_estimation" column="jb_estimation" />
+		<result property="jb_metoo" column="jb_metoo" />
 	</resultMap>
 	
+	<select id="selectAll" resultMap="resultList">
+		select ju_id, jb_gsb, jb_supply, jb_theme, jb_target, jb_estimation, jb_metoo from jboard
+	</select>
+	
+	<select id="selectOne" parameterType="String" resultType="com.he.DTO.MemberDTO">
+		select * from juser where ju_id=#{id}
+	</select>
+	
+	<insert id="insertMember" parameterType="String">
+		insert into juser (ju_id, ju_pw) values (#{id}, #{pw})
+	</insert>
 </mapper>
